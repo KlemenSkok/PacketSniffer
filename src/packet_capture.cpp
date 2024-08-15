@@ -16,10 +16,12 @@ using namespace std;
 // build for linux:
 // g++ test_01.cpp -o test_01 -lpcap
 
-
+struct packet_data {
+    long unsigned dest_ip, src_ip;
+};
 
 int findDeviceName (pcap_if_t *&selected_device, pcap_if_t *&returndevs);
-void analyze_packet(const u_char *packet, int len);
+void parse_packet(const u_char *packet, int len);
 void print_packet_hex(const u_char *packet, int len);
 
 int main(int argc, char *argv[]) {
@@ -95,8 +97,8 @@ int main(int argc, char *argv[]) {
 }
 
 
-void analyze_packet(const u_char *packet, int len) {
-    
+void parse_packet(const u_char *packet, int len) {
+    // TODO myb
 }
 
 
