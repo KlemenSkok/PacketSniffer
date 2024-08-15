@@ -7,8 +7,6 @@
 #include <bitset>
 #include <cctype> // ctype.h
 
-#include "utils.h"
-
 using namespace std;
 
 
@@ -21,6 +19,7 @@ using namespace std;
 
 
 int findDeviceName (pcap_if_t *&selected_device, pcap_if_t *&returndevs);
+void analyze_packet(const u_char *packet, int len);
 void print_packet_hex(const u_char *packet, int len);
 
 int main(int argc, char *argv[]) {
@@ -95,6 +94,12 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+
+void analyze_packet(const u_char *packet, int len) {
+    
+}
+
+
 int findDeviceName (pcap_if_t *&selected_device, pcap_if_t *&returndevs) {
     pcap_if_t *alldevs;
     pcap_if_t *device;
@@ -103,7 +108,7 @@ int findDeviceName (pcap_if_t *&selected_device, pcap_if_t *&returndevs) {
 
     if(pcap_findalldevs(&alldevs, errbuf) == -1) {
         std::cerr << "Error finding devices: " << errbuf << std::endl;
-        return ERR_FINDING_DEVS;
+        return -1;
     }
 
     // iterate through the list of devices
@@ -125,7 +130,7 @@ int findDeviceName (pcap_if_t *&selected_device, pcap_if_t *&returndevs) {
 
     if (selected_device == nullptr) {
         std::cerr << "No suitable device found.\n";
-        return ERR_NO_SUITABLE_DEV; 
+        return -1; 
     }
 
     return 0;
